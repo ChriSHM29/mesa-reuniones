@@ -20,8 +20,8 @@ python -m unittest discover -s tests -v
 
 ## Alcance del MVP
 
-- Tablero con cuatro estados y los cinco integrantes.
-- Reuniones iniciales basadas en el cronograma del proyecto.
+- Tablero con cuatro fases y los cinco integrantes.
+- Nueve reuniones semanales entre el 28 de agosto y el 23 de octubre de 2026.
 - Edición validada de fecha y hora.
 - Persistencia local atómica en `data/board.json`.
 - Diseño responsivo y accesible con identidad propia.

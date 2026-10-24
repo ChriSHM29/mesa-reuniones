@@ -1,8 +1,8 @@
 {
   "workspace": {
     "name": "BaaS Lite",
-    "boardName": "Plan de trabajo · 10 semanas",
-    "dateRange": "14 jul — 20 sep 2026"
+    "boardName": "Bitácora del equipo · 9 semanas",
+    "dateRange": "28 ago — 23 oct 2026"
   },
   "members": [
     {
@@ -38,47 +38,65 @@
   ],
   "lists": [
     {
-      "id": "upcoming",
-      "title": "Próximas"
+      "id": "start",
+      "title": "Arranque"
     },
     {
-      "id": "preparation",
-      "title": "En preparación"
+      "id": "build",
+      "title": "Construcción"
     },
     {
-      "id": "week",
-      "title": "Esta semana"
+      "id": "integration",
+      "title": "Integración"
     },
     {
-      "id": "done",
-      "title": "Realizadas"
+      "id": "close",
+      "title": "Cierre"
     }
   ],
   "cards": [
     {
-      "id": "routes-sync",
-      "title": "Sincronización de rutas y primer PR",
-      "description": "Alinear tenants y datos antes de integrar al enrutador central.",
-      "date": "2026-07-15",
-      "time": "11:00",
-      "ownerId": "christian",
-      "status": "upcoming",
+      "id": "week-1-kickoff",
+      "title": "Kickoff y reparto de responsabilidades",
+      "description": "Acordar alcance, módulos, ramas y reglas de colaboración.",
+      "date": "2026-08-28",
+      "time": "09:30",
+      "ownerId": "julio",
+      "status": "start",
       "week": "Semana 1",
       "attendees": [
         "julio",
         "christian",
-        "cristhian"
+        "cristhian",
+        "david",
+        "geanpier"
       ]
     },
     {
-      "id": "sqlite-review",
-      "title": "Revisión de persistencia SQLite",
-      "description": "Validar consultas y contratos entre módulos.",
-      "date": "2026-07-22",
-      "time": "15:30",
-      "ownerId": "cristhian",
-      "status": "preparation",
+      "id": "week-2-architecture",
+      "title": "Arquitectura y contratos entre módulos",
+      "description": "Definir rutas, datos compartidos y criterios para integrar sin duplicar trabajo.",
+      "date": "2026-09-04",
+      "time": "16:00",
+      "ownerId": "christian",
+      "status": "start",
       "week": "Semana 2",
+      "attendees": [
+        "julio",
+        "christian",
+        "cristhian",
+        "david"
+      ]
+    },
+    {
+      "id": "week-3-data",
+      "title": "Persistencia y colecciones dinámicas",
+      "description": "Revisar el modelo de datos y los registros de prueba del tablero.",
+      "date": "2026-09-11",
+      "time": "15:00",
+      "ownerId": "cristhian",
+      "status": "build",
+      "week": "Semana 3",
       "attendees": [
         "julio",
         "cristhian",
@@ -86,46 +104,93 @@
       ]
     },
     {
-      "id": "config-conflict",
-      "title": "Resolución conjunta de configuración",
-      "description": "Conciliar límites de usuarios y reportes sin perder cambios.",
-      "date": "2026-07-30",
-      "time": "14:00",
+      "id": "week-4-users",
+      "title": "Usuarios, roles y permisos",
+      "description": "Alinear acceso por organización y responsabilidades del equipo.",
+      "date": "2026-09-18",
+      "time": "11:30",
       "ownerId": "david",
-      "status": "week",
-      "week": "Semana 3",
-      "attendees": [
-        "david",
-        "geanpier",
-        "julio"
-      ]
-    },
-    {
-      "id": "views-demo",
-      "title": "Demo de vistas responsivas",
-      "description": "Revisar navegación, tarjetas y formularios del equipo.",
-      "date": "2026-08-07",
-      "time": "10:00",
-      "ownerId": "julio",
-      "status": "preparation",
+      "status": "build",
       "week": "Semana 4",
       "attendees": [
         "julio",
         "christian",
+        "david"
+      ]
+    },
+    {
+      "id": "week-5-interface",
+      "title": "Demo del tablero y experiencia de uso",
+      "description": "Probar tarjetas, navegación y edición de fechas en conjunto.",
+      "date": "2026-09-25",
+      "time": "17:00",
+      "ownerId": "julio",
+      "status": "build",
+      "week": "Semana 5",
+      "attendees": [
+        "julio",
+        "christian",
         "cristhian",
         "david",
         "geanpier"
       ]
     },
     {
-      "id": "kickoff",
-      "title": "Kickoff y reparto de ramas",
-      "description": "Objetivos, responsables y reglas para trabajar sobre main.",
-      "date": "2026-07-14",
-      "time": "09:00",
+      "id": "week-6-reports",
+      "title": "Reportes y métricas del proyecto",
+      "description": "Definir indicadores de avance, consumo y salud de los módulos.",
+      "date": "2026-10-02",
+      "time": "14:30",
+      "ownerId": "geanpier",
+      "status": "integration",
+      "week": "Semana 6",
+      "attendees": [
+        "julio",
+        "cristhian",
+        "geanpier"
+      ]
+    },
+    {
+      "id": "week-7-integration",
+      "title": "Integración general y resolución de conflictos",
+      "description": "Unir los módulos, conservar cambios concurrentes y estabilizar main.",
+      "date": "2026-10-09",
+      "time": "10:00",
+      "ownerId": "christian",
+      "status": "integration",
+      "week": "Semana 7",
+      "attendees": [
+        "julio",
+        "christian",
+        "cristhian",
+        "david",
+        "geanpier"
+      ]
+    },
+    {
+      "id": "week-8-quality",
+      "title": "Auditoría, pruebas y pendientes finales",
+      "description": "Validar flujos críticos, accesibilidad y consistencia de los datos.",
+      "date": "2026-10-16",
+      "time": "16:30",
+      "ownerId": "david",
+      "status": "close",
+      "week": "Semana 8",
+      "attendees": [
+        "julio",
+        "david",
+        "geanpier"
+      ]
+    },
+    {
+      "id": "week-9-release",
+      "title": "Cierre de nueve semanas y preparación del release",
+      "description": "Recorrer resultados, asignar correcciones y acordar la entrega final.",
+      "date": "2026-10-23",
+      "time": "18:00",
       "ownerId": "julio",
-      "status": "done",
-      "week": "Semana 1",
+      "status": "close",
+      "week": "Semana 9 · Hoy",
       "attendees": [
         "julio",
         "christian",

@@ -60,7 +60,7 @@
 
 ## 4. Composición
 
-- Cuatro listas visibles: Próximas, En preparación, Esta semana, Realizadas.
+- Cuatro fases visibles: Arranque, Construcción, Integración y Cierre.
 - Cada lista muestra conteo y tarjetas apiladas.
 - Cada tarjeta contiene etiqueta de semana, título, responsable y un botón-fecha.
 - El bloque de cinco avatares comunica que el tablero pertenece al equipo completo.

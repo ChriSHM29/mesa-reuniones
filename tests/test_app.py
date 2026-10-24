@@ -55,6 +55,18 @@ class BoardStoreTests(unittest.TestCase):
             self.store.reschedule("missing", "2026-07-18", "10:00")
 
 
+class ProjectTimelineTests(unittest.TestCase):
+    def test_seed_data_covers_nine_weekly_meetings_through_october_23(self):
+        board_path = Path(__file__).parents[1] / "data" / "board.json"
+        board = json.loads(board_path.read_text(encoding="utf-8"))
+        meeting_dates = sorted(card["date"] for card in board["cards"])
+
+        self.assertEqual(len(meeting_dates), 9)
+        self.assertEqual(meeting_dates[0], "2026-08-28")
+        self.assertEqual(meeting_dates[-1], "2026-10-23")
+        self.assertEqual(len(board["members"]), 5)
+
+
 if __name__ == "__main__":
     unittest.main()
 
