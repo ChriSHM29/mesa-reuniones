@@ -15,6 +15,11 @@ class BoardStoreTests(unittest.TestCase):
         self.board_path.write_text(
             json.dumps(
                 {
+                    "members": [{"id": "julio"}],
+                    "lists": [
+                        {"id": "upcoming", "title": "Próximas"},
+                        {"id": "done", "title": "Realizadas"},
+                    ],
                     "cards": [
                         {
                             "id": "meeting-1",
@@ -53,6 +58,69 @@ class BoardStoreTests(unittest.TestCase):
     def test_reschedule_rejects_unknown_card(self):
         with self.assertRaises(KeyError):
             self.store.reschedule("missing", "2026-07-18", "10:00")
+
+    def test_create_update_move_and_delete_card(self):
+        created = self.store.create_card(
+            {
+                "title": "Nueva reunión",
+                "description": "Preparar la siguiente entrega.",
+                "date": "2026-07-19",
+                "time": "09:15",
+                "ownerId": "julio",
+                "status": "upcoming",
+                "week": "Semana 2",
+                "attendees": ["julio"],
+            }
+        )
+        updated = self.store.update_card(
+            created["id"], {"title": "Reunión actualizada", "status": "done"}
+        )
+        deleted = self.store.delete_card(created["id"])
+
+        self.assertTrue(created["id"].startswith("meeting-"))
+        self.assertEqual(updated["title"], "Reunión actualizada")
+        self.assertEqual(updated["status"], "done")
+        self.assertEqual(deleted["id"], created["id"])
+        self.assertEqual(len(self.store.read()["cards"]), 1)
+
+    def test_card_requires_known_owner_list_and_attendees(self):
+        with self.assertRaisesRegex(ValidationError, "responsable"):
+            self.store.create_card(
+                {
+                    "title": "Reunión",
+                    "date": "2026-07-19",
+                    "time": "09:15",
+                    "ownerId": "nadie",
+                    "status": "upcoming",
+                    "attendees": [],
+                }
+            )
+
+    def test_create_rename_and_delete_empty_list(self):
+        created = self.store.create_list("Seguimiento")
+        renamed = self.store.rename_list(created["id"], "Seguimiento final")
+        deleted = self.store.delete_list(created["id"])
+
+        self.assertEqual(renamed["title"], "Seguimiento final")
+        self.assertEqual(deleted["id"], created["id"])
+        remaining = self.store.read().get("lists", [])
+        self.assertEqual(len(remaining), 2)
+        self.assertNotIn(created["id"], {item["id"] for item in remaining})
+
+    def test_delete_list_rejects_list_with_cards(self):
+        self.board_path.write_text(
+            json.dumps(
+                {
+                    "members": [{"id": "julio"}],
+                    "lists": [{"id": "upcoming", "title": "Próximas"}],
+                    "cards": [{"id": "meeting-1", "status": "upcoming"}],
+                }
+            ),
+            encoding="utf-8",
+        )
+
+        with self.assertRaisesRegex(ValidationError, "contiene reuniones"):
+            self.store.delete_list("upcoming")
 
 
 class ProjectTimelineTests(unittest.TestCase):

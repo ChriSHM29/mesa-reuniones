@@ -9,84 +9,82 @@
     <link rel="stylesheet" href="/styles.css">
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Saltar al tablero</a>
     <div class="app-shell">
       <header class="topbar">
         <a class="brand" href="/" aria-label="Mesa, inicio">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h14a1.5 1.5 0 0 1 1.5 1.5v12a1.5 1.5 0 0 1-1.5 1.5H5A1.5 1.5 0 0 1 3.5 18V6A1.5 1.5 0 0 1 5 4.5Z"/><path d="M8 8h3v8H8zm5 0h3v5h-3z"/></svg>
           <span>Mesa</span>
         </a>
-        <nav aria-label="Navegación principal">
-          <button class="topbar-link is-active" type="button">Tableros</button>
-          <button class="topbar-link" type="button">Calendario</button>
+        <nav aria-label="Vistas">
+          <button class="topbar-link is-active" type="button" data-view="board" aria-pressed="true">Tablero</button>
+          <button class="topbar-link" type="button" data-view="calendar" aria-pressed="false">Calendario</button>
         </nav>
         <div class="topbar-actions">
-          <button class="icon-button" type="button" aria-label="Buscar">
+          <button class="icon-button" type="button" id="search-button" aria-label="Buscar reuniones" aria-expanded="false">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
           </button>
-          <button class="profile-button" type="button" aria-label="Perfil de Julio Pariona">JP</button>
+          <button class="profile-button" type="button" id="profile-button" aria-label="Perfil de Julio Pariona" aria-expanded="false">JP</button>
         </div>
+        <section class="floating-panel search-panel" id="search-panel" aria-label="Buscar reuniones" hidden>
+          <label for="search-input">Buscar en el tablero</label>
+          <div class="search-field">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4 4"/></svg>
+            <input id="search-input" type="search" autocomplete="off" placeholder="Título, descripción o responsable…">
+          </div>
+          <p class="search-summary" id="search-summary">Escribe para filtrar las reuniones.</p>
+          <div class="search-results" id="search-results"></div>
+        </section>
+        <section class="floating-panel profile-menu" id="profile-menu" aria-label="Perfil" hidden>
+          <div class="profile-summary"><span class="profile-button static">JP</span><div><strong>Julio Pariona</strong><span>Administrador del tablero</span></div></div>
+          <div class="menu-separator"></div>
+          <p>Espacio: <strong>BaaS Lite</strong></p>
+          <p>Persistencia: <strong>Local</strong></p>
+        </section>
       </header>
 
       <section class="board-header" aria-labelledby="board-title">
         <div>
           <p class="eyebrow" id="workspace-name">BaaS Lite</p>
-          <div class="title-row">
-            <h1 id="board-title">Plan de trabajo · 10 semanas</h1>
-            <span class="visibility-pill">
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16v9H4z"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>
-              Equipo
-            </span>
-          </div>
+          <div class="title-row"><h1 id="board-title">Bitácora del equipo · 9 semanas</h1><span class="visibility-pill"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 11h16v9H4z"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>Equipo</span></div>
           <p class="board-subtitle"><span id="meeting-count">0 reuniones</span><span aria-hidden="true">·</span><span id="date-range"></span></p>
         </div>
         <div class="board-tools">
           <div class="member-stack" id="member-stack" aria-label="Miembros del equipo"></div>
           <span class="team-count">5 personas</span>
-          <button class="secondary-button" type="button" id="view-toggle">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="16" rx="2"/><path d="M8 2.8v3.4M16 2.8v3.4M3.5 9h17"/></svg>
-            Ver fechas
-          </button>
+          <button class="primary-button" type="button" id="new-card-button"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>Nueva reunión</button>
         </div>
       </section>
 
-      <main class="board-canvas" aria-label="Tablero de reuniones">
+      <main class="board-canvas" id="main-content" aria-label="Espacio de reuniones" tabindex="-1">
         <div class="board" id="board" aria-busy="true"></div>
+        <section class="calendar-view" id="calendar-view" aria-label="Calendario de reuniones" hidden></section>
       </main>
     </div>
 
-    <dialog class="meeting-dialog" id="meeting-dialog" aria-labelledby="dialog-title">
-      <form method="dialog" id="meeting-form">
-        <div class="dialog-header">
-          <div>
-            <p class="eyebrow">Reprogramar reunión</p>
-            <h2 id="dialog-title">Cambiar fecha</h2>
-          </div>
-          <button class="icon-button dark" value="cancel" aria-label="Cerrar">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
-          </button>
-        </div>
-        <p class="dialog-copy" id="dialog-card-title"></p>
+    <dialog class="meeting-dialog" id="card-dialog" aria-labelledby="card-dialog-title">
+      <form id="card-form">
+        <div class="dialog-header"><div><p class="eyebrow" id="card-dialog-eyebrow">Reunión</p><h2 id="card-dialog-title">Nueva reunión</h2></div><button class="icon-button dark" type="button" data-close-dialog="card-dialog" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div>
         <input type="hidden" id="card-id" name="cardId">
-        <div class="form-grid">
-          <label>
-            <span>Fecha</span>
-            <input type="date" id="meeting-date" name="date" required>
-          </label>
-          <label>
-            <span>Hora</span>
-            <input type="time" id="meeting-time" name="time" required>
-          </label>
+        <div class="form-stack">
+          <label><span>Título</span><input id="card-title" name="title" maxlength="120" autocomplete="off" required></label>
+          <label><span>Descripción</span><textarea id="card-description" name="description" maxlength="500" rows="3"></textarea></label>
+          <div class="form-grid three"><label><span>Semana</span><input id="card-week" name="week" maxlength="40" autocomplete="off" required></label><label><span>Fecha</span><input type="date" id="card-date" name="date" autocomplete="off" required></label><label><span>Hora</span><input type="time" id="card-time" name="time" autocomplete="off" required></label></div>
+          <div class="form-grid"><label><span>Responsable</span><select id="card-owner" name="ownerId" required></select></label><label><span>Fase</span><select id="card-status" name="status" required></select></label></div>
+          <fieldset><legend>Participantes</legend><div class="attendee-options" id="attendee-options"></div></fieldset>
         </div>
-        <p class="form-error" id="form-error" role="alert"></p>
-        <div class="dialog-actions">
-          <button class="secondary-button dark-text" value="cancel" type="button" id="cancel-dialog">Cancelar</button>
-          <button class="primary-button" type="submit" id="save-meeting">Guardar cambio</button>
-        </div>
+        <p class="form-error" id="card-form-error" role="alert"></p>
+        <div class="dialog-actions split"><button class="danger-button" type="button" id="delete-card-button" hidden>Eliminar reunión</button><div><button class="secondary-button dark-text" type="button" data-close-dialog="card-dialog">Cancelar</button><button class="primary-button" type="submit" id="save-card-button">Guardar reunión</button></div></div>
       </form>
     </dialog>
+
+    <dialog class="meeting-dialog compact" id="list-dialog" aria-labelledby="list-dialog-title">
+      <form id="list-form"><div class="dialog-header"><div><p class="eyebrow">Fase</p><h2 id="list-dialog-title">Nueva fase</h2></div><button class="icon-button dark" type="button" data-close-dialog="list-dialog" aria-label="Cerrar"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button></div><input type="hidden" id="list-id"><label><span>Nombre</span><input id="list-title" maxlength="60" autocomplete="off" required></label><p class="form-error" id="list-form-error" role="alert"></p><div class="dialog-actions"><button class="secondary-button dark-text" type="button" data-close-dialog="list-dialog">Cancelar</button><button class="primary-button" type="submit">Guardar fase</button></div></form>
+    </dialog>
+
+    <dialog class="confirm-dialog" id="confirm-dialog" aria-labelledby="confirm-title"><form method="dialog"><h2 id="confirm-title">Confirmar eliminación</h2><p id="confirm-copy"></p><div class="dialog-actions"><button class="secondary-button dark-text" value="cancel">Conservar</button><button class="danger-button solid" value="confirm">Eliminar</button></div></form></dialog>
 
     <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
     <script src="/app.js" defer></script>
   </body>
 </html>
-

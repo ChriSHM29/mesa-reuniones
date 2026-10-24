@@ -73,6 +73,12 @@
 - `DateChip`: neutral, próxima, hoy, vencida; es un botón real con nombre accesible.
 - `MeetingDialog`: opening, editing, saving, success, validation error; foco contenido por el elemento nativo `dialog`.
 - `Toast`: éxito/error, `aria-live="polite"`, autocierre respetando lectura.
+- `SearchPopover`: cerrado, búsqueda activa, sin resultados y resultados filtrados; `Escape` cierra y devuelve el foco.
+- `ProfileMenu`: cerrado/abierto; presenta identidad y estado local, sin simular autenticación remota.
+- `ListMenu`: cerrado/abierto, renombrar y eliminar; eliminar una lista con tarjetas queda bloqueado con explicación.
+- `CardDialog`: crear/editar, guardando, error y confirmación destructiva; título, descripción, fase, responsable, fecha y hora.
+- `CalendarView`: alterna con el tablero, ordena reuniones por fecha y conserva edición directa.
+- `AddListControl`: reposo, edición y error; añade una fase al final del lienzo.
 
 ## 6. Movimiento
 
@@ -91,6 +97,6 @@
 - Contraste mínimo AA; foco visible de 3 px exclusivamente para teclado.
 - Ninguna interacción depende solo del color.
 - Fechas se muestran en español y se almacenan como `YYYY-MM-DD` sin conversión UTC.
-- Deuda aceptada del MVP: no hay autenticación, sincronización multiusuario ni drag-and-drop.
-- Estados a verificar: tablero poblado, edición válida, fecha inválida, persistencia tras recarga, móvil 390 px y escritorio 1440 px.
+- Deuda aceptada: no hay autenticación ni sincronización multiusuario; el movimiento entre fases usa un selector accesible en vez de arrastre.
+- Estados a verificar: tablero, calendario, búsqueda con/sin resultados, menús, CRUD de reuniones y fases, persistencia tras recarga, móvil 390 px y escritorio 1440 px.
 
