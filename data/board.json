@@ -1,0 +1,138 @@
+{
+  "workspace": {
+    "name": "BaaS Lite",
+    "boardName": "Plan de trabajo · 10 semanas",
+    "dateRange": "14 jul — 20 sep 2026"
+  },
+  "members": [
+    {
+      "id": "julio",
+      "name": "Julio Pariona",
+      "initials": "JP",
+      "color": "violet"
+    },
+    {
+      "id": "christian",
+      "name": "Christian Muñoa",
+      "initials": "CM",
+      "color": "cyan"
+    },
+    {
+      "id": "cristhian",
+      "name": "Cristhian Palomino",
+      "initials": "CP",
+      "color": "amber"
+    },
+    {
+      "id": "david",
+      "name": "David Torre",
+      "initials": "DT",
+      "color": "rose"
+    },
+    {
+      "id": "geanpier",
+      "name": "Geanpier Meza",
+      "initials": "GM",
+      "color": "green"
+    }
+  ],
+  "lists": [
+    {
+      "id": "upcoming",
+      "title": "Próximas"
+    },
+    {
+      "id": "preparation",
+      "title": "En preparación"
+    },
+    {
+      "id": "week",
+      "title": "Esta semana"
+    },
+    {
+      "id": "done",
+      "title": "Realizadas"
+    }
+  ],
+  "cards": [
+    {
+      "id": "routes-sync",
+      "title": "Sincronización de rutas y primer PR",
+      "description": "Alinear tenants y datos antes de integrar al enrutador central.",
+      "date": "2026-07-15",
+      "time": "11:00",
+      "ownerId": "christian",
+      "status": "upcoming",
+      "week": "Semana 1",
+      "attendees": [
+        "julio",
+        "christian",
+        "cristhian"
+      ]
+    },
+    {
+      "id": "sqlite-review",
+      "title": "Revisión de persistencia SQLite",
+      "description": "Validar consultas y contratos entre módulos.",
+      "date": "2026-07-22",
+      "time": "15:30",
+      "ownerId": "cristhian",
+      "status": "preparation",
+      "week": "Semana 2",
+      "attendees": [
+        "julio",
+        "cristhian",
+        "geanpier"
+      ]
+    },
+    {
+      "id": "config-conflict",
+      "title": "Resolución conjunta de configuración",
+      "description": "Conciliar límites de usuarios y reportes sin perder cambios.",
+      "date": "2026-07-30",
+      "time": "14:00",
+      "ownerId": "david",
+      "status": "week",
+      "week": "Semana 3",
+      "attendees": [
+        "david",
+        "geanpier",
+        "julio"
+      ]
+    },
+    {
+      "id": "views-demo",
+      "title": "Demo de vistas responsivas",
+      "description": "Revisar navegación, tarjetas y formularios del equipo.",
+      "date": "2026-08-07",
+      "time": "10:00",
+      "ownerId": "julio",
+      "status": "preparation",
+      "week": "Semana 4",
+      "attendees": [
+        "julio",
+        "christian",
+        "cristhian",
+        "david",
+        "geanpier"
+      ]
+    },
+    {
+      "id": "kickoff",
+      "title": "Kickoff y reparto de ramas",
+      "description": "Objetivos, responsables y reglas para trabajar sobre main.",
+      "date": "2026-07-14",
+      "time": "09:00",
+      "ownerId": "julio",
+      "status": "done",
+      "week": "Semana 1",
+      "attendees": [
+        "julio",
+        "christian",
+        "cristhian",
+        "david",
+        "geanpier"
+      ]
+    }
+  ]
+}
